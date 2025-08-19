@@ -1,6 +1,6 @@
-ews model for monitoring each active subs and paus subs attendance over the year 2025. 
-this is custome model top production for lesmills gym company.
+ews model for monitoring each active subs and pause subs attendance over the year 2025. 
+this is custome model for production for lesmills gym company.
 
---  for running this model needs to chunk data per year as i did it earlier.
+--  for running this model needs to chunk data per year (2025 or before or after) as i did it for 2025.
 
-stage first done. 2025-08-19 by keyavn 
+     # stage first done. 2025-08-19 by keyavn 

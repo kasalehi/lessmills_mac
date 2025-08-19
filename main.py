@@ -1,24 +1,8 @@
+# please running following code by providing export data from injest.sql query  
+# fllowing code just return top 500 cases .... please do not change capacity and lambda weight .. 
+# for more understanding please see the power point files attached in repo. :)
+
 import pandas as pd
-from ews_model import EWSModel
-
-# Load your subscription weekly data
-df = pd.read_csv("sample25.csv", parse_dates=["WeekBeginningDate"], low_memory=False)
-
-# Map columns to expected names
-df = df.rename(columns={
-    "MembershipID": "member_id",
-    "WeekBeginningDate": "week",
-    "WeekVisits": "engagement"
-})
-
-# Initialize & fit the model
-model = EWSModel(k_weeks=6, ema_span=4, drought_churn_weeks=8)
-model.fit(df)
-
-# Predict Early Warning Scores
-scores = model.predict(df)
-print(scores.head())
-
-# Evaluate performance
-report = model.evaluate(df)
-print(report)
+from outreach_paused import build_outreach
+df = pd.read_csv("data25.csv", parse_dates=["week"])
+active_q, paused_q, model = build_outreach(df, lambda_blend=0.6, capacity=500)

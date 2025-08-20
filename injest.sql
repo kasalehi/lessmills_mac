@@ -12,11 +12,9 @@ WITH mw AS (
     CAST(m.WeekBeginningDate AS date)                         AS week_start,
     DATEADD(DAY, 6, CAST(m.WeekBeginningDate AS date))        AS week_end
   FROM pbi.LMNZ_MemberWeeklyAttendanceCount AS m
-
-  -- inner join to crm to make sure the weekly attendance are bounded by startmemebershipdate (please change varaiable @year based on bussines target)
   inner join repo.CRM_ActiveMemberships crm 
   on m.MembershipID= crm.MembershipID
-  where year(MembershipStartDate)>=@year
+  where year(MembershipStartDate)>=@year and crm.MembershipStatusReason in ('Active', 'Active - Suspended')
 ),
 susp AS (
   SELECT
